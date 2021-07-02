@@ -1,6 +1,6 @@
-// 007a 自力AC
-// 自力解法: 二分探索で高速化
-// 茶diff
+// 010a 自力AC
+// 自力解法: 累積和を前計算
+// 灰diff
 
 #include <bits/stdc++.h>
 using namespace std;
@@ -16,20 +16,22 @@ using ll = long long;
 int main() {
 	int n, q;
 	cin >> n;
-	vector<int> a(n);
-	rep(i, n) cin >> a[i];
-	set<int> alst;
-	rep(i, n) alst.insert(a[i]);
+	vector<int> c(n), p(n);
+	rep(i, n) {
+		cin >> c[i] >> p[i];
+		c[i]--;
+	}
+	vector<vector<int>> sum(n+1, vector<int>(2));
+	rep(i, n) rep(j, 2) {
+		if (c[i] == j) sum[i+1][j] = sum[i][j] + p[i];
+		else sum[i+1][j] = sum[i][j];
+	}
 	cin >> q;
 	rep(i, q) {
-		int bi;
-		cin >> bi;
-		auto itr = alst.upper_bound(bi);
-		int res = -1;
-		if (itr == alst.end()) res = abs(bi-(*prev(itr)));
-		else if (itr == alst.begin()) res = abs(bi-(*itr));
-		else res = min(abs(bi-(*prev(itr))), abs(bi-(*itr)));
-		cout << res << endl;
+		int li, ri;
+		cin >> li >> ri;
+		--li;
+		cout << (sum[ri][0]-sum[li][0]) << ' ' << (sum[ri][1]-sum[li][1]) << endl;
 	}
 	return 0;
 }

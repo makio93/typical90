@@ -1,5 +1,5 @@
 // 003a 自力AC
-// 木の直径
+// 自力解法: 木の直径を求める
 // 緑diff
 
 #include <bits/stdc++.h>

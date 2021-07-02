@@ -1,5 +1,5 @@
-// 001a 解説AC
-// 二分探索
+// 001b 解説AC
+// 想定解法: 二分探索
 // 緑diff
 
 #include <bits/stdc++.h>

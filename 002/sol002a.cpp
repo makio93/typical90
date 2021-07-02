@@ -1,5 +1,5 @@
-// 002a 解説AC
-// bit全探索
+// 002a 自力AC
+// 自力解法: 再帰関数を用いて構築
 // 茶diff
 
 #include <bits/stdc++.h>
@@ -13,24 +13,23 @@ using ll = long long;
 #define rep3r(i, m, n) for (int i=(int)(n)-1; (i)>=(int)(m); --(i))
 #define all(x) (x).begin(), (x).end()
 
+void dfs(vector<string>& res, int n, string tstr="", int d=0, int p=0) {
+	if (d == n) res.push_back(tstr);
+	else {
+		if (p < n/2) dfs(res, n, tstr+'(', d+1, p+1);
+		if (d-p < p) dfs(res, n, tstr+')', d+1, p);
+	}
+}
+
 int main() {
 	int n;
 	cin >> n;
-	if (n%2 != 0) {
-		cout << endl;
-		return 0;
-	}
-	rep(i, (1<<n)) {
-		string str;
-		repr(j, n) str += ((i&(1<<j)) == 0) ? '(' : ')';
-		bool ok = true;
-		int scnt = 0;
-		rep(j, n) {
-			scnt += (str[j] == '(') ? 1 : -1;
-			if (scnt < 0) ok = false;
-		}
-		if (scnt != 0) ok = false;
-		if (ok) cout << str << endl;
+	if (n%2 != 0) cout << endl;
+	else {
+		vector<string> res;
+		dfs(res, n);
+		int len = res.size();
+		rep(i, len) cout << res[i] << endl;
 	}
 	return 0;
 }

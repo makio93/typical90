@@ -1,5 +1,5 @@
 // 008a 自力AC/ACLあり
-// 状態DP
+// 自力解法: i文字目までの結果ごとに状態を持ってDP
 // 緑diff
 
 #include <bits/stdc++.h>
